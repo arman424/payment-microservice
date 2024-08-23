@@ -3,3 +3,7 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+api_v1_payments:
+    path: /api/v1/payments
+    controller: App\Controller\API\V1\Payments\PaymentController::makePayment

@@ -4,6 +4,8 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    aci_api_url: '%env(ACI_API_URL)%'
+    aci_api_key: '%env(ACI_API_KEY)%'
 
 services:
     # default configuration for services in *this* file
@@ -22,3 +24,22 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Controller\API\V1\Payments\PaymentController:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    App\Services\Payments\PaymentGatewayFactory:
+        autowire: true
+        autoconfigure: true
+
+    App\Services\Payments\PaymentGateways\AciPaymentGateway:
+        arguments:
+            $httpClient: '@App\Services\HttpClient\HttpClientService'
+            $responseAdapter: '@App\Services\Payments\PaymentGatewayResponseAdapter\AciPaymentGatewayResponseAdapter'
+
+    App\Services\Payments\PaymentGateways\ShiftPaymentGateway:
+        arguments:
+            $httpClient: '@App\Services\HttpClient\HttpClientService'
+            $responseAdapter: '@App\Services\Payments\PaymentGatewayResponseAdapter\ShiftPaymentGatewayResponseAdapter'
