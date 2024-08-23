@@ -85,11 +85,10 @@ class MakePaymentCommand extends Command
 
         try {
             $io->text(($this->makePaymentAction)(PaymentDetailsDTO::init($paymentDetails))->toArray());
+            $io->success('Payment request has been processed.');
         } catch (Exception $e) {
             $io->error(['error' => $e->getMessage()]);
         }
-
-        $io->success('Payment request has been processed.');
 
         return Command::SUCCESS;
     }
