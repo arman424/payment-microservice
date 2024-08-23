@@ -29,7 +29,7 @@ External systems are Shift4 and ACI.
    cd payment-microservice
 ```
 
-2. Build and Run Docker Containers:
+2. **Build and Run Docker Containers:**
 
 ```bash
   docker-compose up --build
@@ -38,13 +38,13 @@ External systems are Shift4 and ACI.
 
 ## Configuration
 
-1. Copy the example environment file to create your local configuration file:
+1. **Copy the example environment file to create your local configuration file:**
 
     ```bash
     cp .env.example .env.local
     ```
 
-2. Open `.env.local` and `.env.test` and update the credentials and connection settings, specifically the `DATABASE_URL` variable.
+2. **Open `.env.local` and `.env.test` and update the credentials and connection settings, specifically the `DATABASE_URL` variable.**
 
 ### Access the Application:
 
@@ -91,4 +91,4 @@ Run PHPUnit Tests:
 This will execute all tests in the `tests` directory.
 
 ### TODOs
-Please consider the TODOs for implementing the Payment Providers, Swagger OAs, Money Object for amounts and making improvements.
+Please consider the TODOs for implementing the `Payment Providers`, `Swagger OAs`, `Money Object` for amounts and making improvements.
