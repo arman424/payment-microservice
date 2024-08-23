@@ -10,7 +10,7 @@ use App\Services\Payments\PaymentGatewayFactory;
 use Exception;
 use Psr\Log\LoggerInterface;
 
-readonly class MakePaymentAction
+class MakePaymentAction
 {
     public function __construct(
         private PaymentsRepository $paymentsRepository,

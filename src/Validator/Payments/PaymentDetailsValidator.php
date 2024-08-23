@@ -8,7 +8,7 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-readonly class PaymentDetailsValidator
+class PaymentDetailsValidator
 {
     public function __construct(
         private ValidatorInterface $validator
