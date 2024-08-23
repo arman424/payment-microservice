@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Command;
+namespace App\Command\Payments;
 
 use App\Actions\Payments\MakePaymentAction;
 use App\DTO\Payments\PaymentDetailsDTO;
 use App\Enums\Payments\PaymentMethodsEnum;
 use App\Validator\Payments\PaymentDetailsValidator;
+use Exception;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -92,7 +93,11 @@ class MakePaymentCommand extends Command
             'CVV: ' . $cardCvv,
         ]);
 
-        $io->text(($this->makePaymentAction)(PaymentDetailsDTO::init($paymentDetails))->toArray());
+        try {
+            $io->text(($this->makePaymentAction)(PaymentDetailsDTO::init($paymentDetails))->toArray());
+        } catch (Exception $e) {
+            $io->error(['error' => $e->getMessage()]);
+        }
 
         $io->success('Payment request has been processed.');
 

@@ -19,19 +19,17 @@ readonly class PaymentController
 
     public function makePayment(Request $request): JsonResponse
     {
-        $data = $request->request->all();
+        $requestData = $request->request->all();
 
-        $violations = $this->validator->validate($data);
+        $violations = $this->validator->validate($requestData);
 
         if ($violations->count() > 0) {
             $errors = array_map(fn($violation) => $violation->getMessage(), $violations->getIterator()->getArrayCopy());
             return new JsonResponse(['errors' => $errors], Response::HTTP_BAD_REQUEST);
         }
 
-        $paymentDetailsDTO = PaymentDetailsDTO::init($data);
-
         try {
-            $response = ($this->makePaymentAction)($paymentDetailsDTO);
+            $response = ($this->makePaymentAction)(PaymentDetailsDTO::init($requestData));
             return new JsonResponse($response->toArray(), Response::HTTP_OK);
         } catch (Exception $e) {
             return new JsonResponse(['error' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);

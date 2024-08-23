@@ -67,14 +67,16 @@ class CreatePaymentDTO
         return $this;
     }
 
-    public function getAmount(): float
+    public function getAmount(): int
     {
         return $this->amount;
     }
 
     public function setAmount(float $amount): self
     {
-        $this->amount = $amount;
+        //TODO consider using Money object for amounts in order to deal with minors.
+        // For now I will just cast it to int
+        $this->amount = (int) $amount;
 
         return $this;
     }

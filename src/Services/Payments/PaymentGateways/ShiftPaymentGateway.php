@@ -24,6 +24,7 @@ class ShiftPaymentGateway implements PaymentGatewayContract
     public function makePayment(PaymentDetailsDTO $paymentDetailsDTO): UnifiedPaymentResponseDTO
     {
         //TODO implement the real request
+
 //        $response = $this->httpClient->post(
 //            $this->apiUrl,
 //            $paymentDetailsDTO->toArray(),

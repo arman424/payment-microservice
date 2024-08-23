@@ -6,7 +6,6 @@ class PaymentDetailsDTO
 {
     private string $psp;
 
-    //TODO consider using Money object for amounts in order to deal with minors
     private float $amount;
 
     private string $currency;
