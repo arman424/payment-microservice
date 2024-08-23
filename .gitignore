@@ -9,5 +9,5 @@
 /vendor/
 .idea
 .git
-/.env.example
+/.env
 ###< symfony/framework-bundle ###
