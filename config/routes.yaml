@@ -5,5 +5,6 @@ controllers:
     type: attribute
 
 api_v1_payments:
-    path: /api/v1/payments
+    path: /api/v1/payments/{paymentType}
     controller: App\Controller\API\V1\Payments\PaymentController::makePayment
+    methods: [POST]

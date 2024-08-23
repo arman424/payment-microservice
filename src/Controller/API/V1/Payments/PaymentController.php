@@ -17,11 +17,12 @@ readonly class PaymentController
         private MakePaymentAction $makePaymentAction
     ) {}
 
-    public function makePayment(Request $request): JsonResponse
+    // TODO: Add Swagger annotations for API documentation
+    public function makePayment(Request $request, string $paymentType): JsonResponse
     {
-        $requestData = $request->request->all();
+        $paymentData = array_merge($request->request->all(), ['psp' => $paymentType]);
 
-        $violations = $this->validator->validate($requestData);
+        $violations = $this->validator->validate($paymentData);
 
         if ($violations->count() > 0) {
             $errors = array_map(fn($violation) => $violation->getMessage(), $violations->getIterator()->getArrayCopy());
@@ -29,7 +30,7 @@ readonly class PaymentController
         }
 
         try {
-            $response = ($this->makePaymentAction)(PaymentDetailsDTO::init($requestData));
+            $response = ($this->makePaymentAction)(PaymentDetailsDTO::init($paymentData));
             return new JsonResponse($response->toArray(), Response::HTTP_OK);
         } catch (Exception $e) {
             return new JsonResponse(['error' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);

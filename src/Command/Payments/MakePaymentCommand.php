@@ -83,16 +83,6 @@ class MakePaymentCommand extends Command
             return Command::FAILURE;
         }
 
-        $io->section('Payment Details');
-        $io->text([
-            'PSP: ' . $psp,
-            'Amount: ' . $amount,
-            'Currency: ' . $currency,
-            'Card Number: ' . $cardNumber,
-            'Expiration: ' . $cardExpMonth . '/' . $cardExpYear,
-            'CVV: ' . $cardCvv,
-        ]);
-
         try {
             $io->text(($this->makePaymentAction)(PaymentDetailsDTO::init($paymentDetails))->toArray());
         } catch (Exception $e) {

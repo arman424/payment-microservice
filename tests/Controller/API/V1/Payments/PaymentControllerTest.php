@@ -38,7 +38,6 @@ class PaymentControllerTest extends TestCase
         $controller = new PaymentController($validatorMock, $makePaymentActionMock);
 
         $request = new Request([], [
-            'psp' => 'aci',
             'amount' => '100',
             'currency' => 'USD',
             'card_number' => '4111111111111111',
@@ -47,7 +46,7 @@ class PaymentControllerTest extends TestCase
             'card_cvv' => '123',
         ]);
 
-        $response = $controller->makePayment($request);
+        $response = $controller->makePayment($request, 'aci');
 
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
@@ -77,7 +76,6 @@ class PaymentControllerTest extends TestCase
         $controller = new PaymentController($validatorMock, $makePaymentActionMock);
 
         $request = new Request([], [
-            'psp' => 'SomePSP',
             'amount' => '100',
             'currency' => 'USD',
             'card_number' => '4111111111111111',
@@ -86,7 +84,7 @@ class PaymentControllerTest extends TestCase
             'card_cvv' => '123',
         ]);
 
-        $response = $controller->makePayment($request);
+        $response = $controller->makePayment($request, 'WrongPSP');
 
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertEquals(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
@@ -108,7 +106,6 @@ class PaymentControllerTest extends TestCase
         $controller = new PaymentController($validatorMock, $makePaymentActionMock);
 
         $request = new Request([], [
-            'psp' => 'shift',
             'amount' => '100',
             'currency' => 'USD',
             'card_number' => '4111111111111111',
@@ -117,7 +114,7 @@ class PaymentControllerTest extends TestCase
             'card_cvv' => '123',
         ]);
 
-        $response = $controller->makePayment($request);
+        $response = $controller->makePayment($request, 'shift');
 
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertEquals(Response::HTTP_INTERNAL_SERVER_ERROR, $response->getStatusCode());
