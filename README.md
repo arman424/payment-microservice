@@ -60,7 +60,7 @@ The application should be available at http://localhost:8081.
 
 To execute the payment command, use:
 ```bash
-  php bin/console MakePayment --psp --amount=100 --currency=USD --card-number=4111111111111111 --card-exp-year=2024 --card-exp-month=12 --card-cvv=123
+  php bin/console MakePayment --amount=100 --currency=USD --card-number=4111111111111111 --card-exp-year=2025 --card-exp-month=12 --card-cvv=123
 ```
 ### API Endpoints
 Process a payment request.
