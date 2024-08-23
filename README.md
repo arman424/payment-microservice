@@ -35,17 +35,21 @@ External systems are Shift4 and ACI.
   docker-compose up --build
 ```
 
-
 ## Configuration
 
 1. **Copy the example environment file to create your local configuration file:**
 
-    ```bash
-    cp .env.example .env.local
-    ```
+```bash
+  cp .env.example .env.local
+ ```
 
 2. **Open `.env.local` and `.env.test` and update the credentials and connection settings, specifically the `DATABASE_URL` variable.**
 
+3. **Run migrations:**
+
+```bash
+  php bin/console doctrine:migrations:migrate
+```
 ### Access the Application:
 
 The application should be available at http://localhost:8081.
